@@ -141,6 +141,10 @@ public class fizzbuzz {
 				System.out.println("Info ==> Method 3 chosen: calling FBdeluxe() ");
 				result = fbdelux(snum, inum);
 				break;
+			case (4):
+				System.out.println("Info ==> Method 4 chosen: calling FBfake() ");
+	  			result = fbfake(snum, inum);
+				break;
 			default:
 				System.out.println("Error ==> invalid Round number entered - exiting");
 				System.exit(-1);
@@ -253,5 +257,27 @@ public class fizzbuzz {
 		return outstr;
 	} // fbdelux()
 
+
+	//*********************************************************************************************
+	// Round 4 method. More or less identical to Round 3 above but we need another extra check for
+	// 'fake delux' numbers, which are simple deluxe numbers that are odd. Easiest here to
+	// simply duplicate the fbdeluxe() code and just do the extra check.
+	//*********************************************************************************************
+	public static String fbfake (String snum, int inum) {
+		// do the fizz and buzz checks
+		String outstr = fbvar(snum, inum, false);  // we are not a main caller, just using fbvar() as a subroutine
+
+		// now do the 'deluxe' check
+		if( (inum>10) && isAllSameChar(snum) )
+		{
+			// if we get here, we have a deluxe number, so we need to check if it is 'fake' (odd)
+			if (isOdd(inum))	//odd
+				outstr += "fake deluxe ";
+			else
+				outstr += "deluxe ";
+		}
+
+		return outstr;
+	} // fbfake()
 
 } // class fizzbuzz
