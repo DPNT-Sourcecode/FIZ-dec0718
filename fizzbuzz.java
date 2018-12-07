@@ -145,6 +145,10 @@ public class fizzbuzz {
 				System.out.println("Info ==> Method 4 chosen: calling FBfake() ");
 	  			result = fbfake(snum, inum);
 				break;
+			case (5):
+				System.out.println("Info ==> Method 5 chosen: calling hipster() ");
+	  			result = hipster(snum, inum);
+				break;
 			default:
 				System.out.println("Error ==> invalid Round number entered - exiting");
 				System.exit(-1);
@@ -279,5 +283,32 @@ public class fizzbuzz {
 
 		return outstr;
 	} // fbfake()
+
+
+	//*********************************************************************************************
+	// Round 5 method. We change all the rules for deluxe, but can re-use the helper routines
+	// above (which is why I created them in the first place!) and reuse the Round 2 method here
+	// too since the rules for 'fizz' and 'buzz' are still the same as they were then.
+	//*********************************************************************************************
+	public static String hipster (String snum, int inum) {
+		// do the fizz and buzz checks
+		String outstr = fbvar(snum, inum, false);  // we are not a main caller, just using fbvar() as a subroutine
+
+		// now do the new 'deluxe' checks. Note that these are the same as some of the
+		// checks used in Round 2 but are extended and repurposed here.
+		// Comment - I normally avoid huge / complex logic strings like this as it is easy to have oddball
+		// errors that occur because of side effects and weird interactions, and it is usually damned difficult
+		// to find the cause(s). Such code inevitably causes problems and is hard to maintain, so I would
+		// normally avoid it like the plague.
+
+		if (
+				( (isDivisbleBy3(inum)) && (containsChar(snum, c3)) )
+				||
+				( (isDivisbleBy5(inum)) && (containsChar(snum, c5)) )
+			)
+			outstr += "deluxe ";
+
+		return outstr;
+	} // hipster()
 
 } // class fizzbuzz
