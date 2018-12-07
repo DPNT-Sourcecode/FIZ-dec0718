@@ -136,7 +136,11 @@ public class fizzbuzz {
 			case (2):
 				System.out.println("Info ==> Method 2 chosen: calling FBvar() ");
 				result = fbvar(snum, inum, true);
-				break; 			
+				break;
+			case (3):
+				System.out.println("Info ==> Method 3 chosen: calling FBdeluxe() ");
+				result = fbdelux(snum, inum);
+				break;
 			default:
 				System.out.println("Error ==> invalid Round number entered - exiting");
 				System.exit(-1);
@@ -234,6 +238,20 @@ public class fizzbuzz {
 		// exit to caller
 		return(outstr);
 	} // fbvar()
+
+
+	//*********************************************************************************************
+	// Round 3 method. We can reuse the Round 2 method and just add the 'deluxe' check to it
+	//*********************************************************************************************
+	public static String fbdelux (String snum, int inum) {
+		String outstr = fbvar(snum, inum, false);  // we are not a main caller, just using fbvar() as a subroutine
+
+		// now do the 'deluxe' check
+		if( (inum>10) && isAllSameChar(snum) )
+			outstr += "deluxe ";
+
+		return outstr;
+	} // fbdelux()
 
 
 } // class fizzbuzz
