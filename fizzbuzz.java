@@ -133,6 +133,10 @@ public class fizzbuzz {
 				System.out.println("Info ==> Method 1 chosen: calling fb1() ");
 				result=fb1 (inum);
 				break;
+			case (2):
+				System.out.println("Info ==> Method 2 chosen: calling FBvar() ");
+				result = fbvar(snum, inum, true);
+				break; 			
 			default:
 				System.out.println("Error ==> invalid Round number entered - exiting");
 				System.exit(-1);
@@ -178,5 +182,58 @@ public class fizzbuzz {
 
 		return outstr;
 	}   // fb()
+
+
+	//*********************************************************************************************
+	// Round 2 method. Print 'fizz' if divisible by 3, or contains the character 3, 'buzz' if
+	// divisible by 5 or contains the character 5, and 'fizz buzz' if at least one of both (pairs)
+	// is true.
+	//
+	// Nothing about printing the number if neither apply is specified, so we will give the user a
+	// helpful warning message if none of the above are true, and if we have been called by some
+	// main() routine that is expecting user output rather than a silent return with no indication that
+	// that we have actually executed and not just died.
+	//
+	// However, if we have been called by another routine (fbdeluxe in Round 3 for example)
+	// then we dont want to add it to the returned string as the calling routine would receive a
+	// warning that it is not expecting and which may or may not be relevant to it anyway.
+	//
+	// Commment - we pass both the integer and string versions of the number entered to this
+	// method as we will use both, and doing so avoids unnecessary type conversions
+	//*********************************************************************************************
+	public static String fbvar (String snum, int inum, boolean maincaller) {
+		if (debug) System.out.println("Debug ==> entering fbvar - Round 2");
+//		String c3="3", c5="5";
+		String outstr =""; 			// initialise empty string
+		boolean fbed=false;				// flag - did we find fizz or buzz?
+
+		if( (isDivisbleBy3(inum)) || (containsChar(snum, c3)) ) {
+			outstr += "fizz ";
+			fbed = true;
+		}
+
+		if( (isDivisbleBy5(inum)) || (containsChar(snum, c5)) ) {
+			outstr += "buzz ";
+			fbed = true;
+		}
+
+		if (debug) System.out.println("Round 2 - fbvar() - result is: " + outstr);    // print results
+		if (debug) System.out.println("Debug ==> leaving fbvar - Round 2");
+
+		// if this routine has been called directly by a main routine, we ought to give the
+		// user a warning if a number is neither fizz nor buzz - since we dont print out
+		// the number here it would just return silently with no indication of what is
+		// going on.
+
+		// Print a warning if necessary
+		if (maincaller && !fbed) {		// we have been called by a main() routine and are not simply
+										// being used as a subroutine
+			System.out.println("Warning ==> number is neither fizz nor buzz");
+		}
+
+		// exit to caller
+		return(outstr);
+	} // fbvar()
+
 
 } // class fizzbuzz
